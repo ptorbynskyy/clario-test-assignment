@@ -10,8 +10,7 @@ import { SignUpButton } from "./SignUpButton/SignUpButton.tsx";
 export interface SignUpFormProps {
 	readonly className?: string;
 
-	readonly initialEmailValue: string;
-	readonly initialPasswordValue: string;
+	readonly initialEmailValue: string; // TODO: Handle initial value
 	readonly onSignUp: (email: string, password: string) => void;
 }
 

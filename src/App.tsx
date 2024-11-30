@@ -2,13 +2,10 @@ import "./App.css";
 import { SignUpForm } from "./components/SignUpForm.tsx";
 
 function App() {
+	// TODO: Handle SignUp
 	return (
 		<>
-			<SignUpForm
-				initialEmailValue={""}
-				initialPasswordValue={""}
-				onSignUp={() => {}}
-			/>
+			<SignUpForm initialEmailValue={""} onSignUp={() => {}} />
 		</>
 	);
 }

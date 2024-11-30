@@ -1,0 +1,42 @@
+.validationContainer {
+	margin-block: 12px;
+	padding: 16px;
+	border: 1px solid grey;
+	border-radius: 12px;
+}
+
+.validationContainer > * {
+	width: 100%;
+}
+
+.validationContainer.normal {
+	color: gray;
+	border-color: gray;
+}
+
+.validationContainer:focus-within.normal {
+	color: black;
+	border-color: black;
+}
+
+.validationContainer.success {
+	color: green;
+	border-color: green;
+}
+
+.validationContainer.error {
+	color: red;
+	border-color: red;
+}
+
+.rule.normal {
+	color: gray;
+}
+
+.rule.success {
+	color: green;
+}
+
+.rule.error {
+	color: red;
+}

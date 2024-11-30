@@ -1,28 +1,11 @@
 import { useReducer } from "react";
-import {
-	type ValidationConfiguration,
-	validate,
-} from "../validation-rule-types.ts";
-import {
-	type ValidationState,
-	reduceValidationState,
-} from "./validation-state.ts";
+import type { ValidationConfiguration } from "../validation-rule-types.ts";
+import { getInitialState, reduceValidationState } from "./validation-state.ts";
 
 export const useValidationState = (configuration: ValidationConfiguration) => {
-	const validateValue = validate(configuration);
-	const initialState: ValidationState = {
-		type: "initial",
-		validationItems: configuration.rules.map((i) => ({
-			message: i.message,
-			mode: "normal",
-		})),
-		value: "",
-		focused: false,
-	};
-
 	const [state, dispatch] = useReducer(
-		reduceValidationState(validateValue),
-		initialState,
+		reduceValidationState(configuration),
+		getInitialState(configuration),
 	);
 
 	const onValueChanged = (value: string): void => {

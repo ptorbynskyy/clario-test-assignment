@@ -5,6 +5,7 @@ export type ValidationRule = {
 
 export type ValidationConfiguration = {
 	readonly rules: readonly ValidationRule[];
+	readonly laterValidation: boolean;
 };
 
 export type ValidationResult = {
@@ -14,19 +15,4 @@ export type ValidationResult = {
 
 export type ValidationResults = {
 	items: readonly ValidationResult[];
-};
-
-export const validate =
-	(configuration: ValidationConfiguration) =>
-	(val: string): ValidationResults => {
-		return {
-			items: configuration.rules.map((rule) => ({
-				rule,
-				isValid: rule.validate(val),
-			})),
-		};
-	};
-
-export const isValid = (results: ValidationResults): boolean => {
-	return results.items.every((item) => item.isValid);
 };

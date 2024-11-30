@@ -5,7 +5,8 @@ import {
 	hasLowerAndUppercaseLetters,
 } from "./password-validation-rules.ts";
 
-export const passwordValidationRules: ValidationConfiguration = {
+export const passwordValidationConfiguration: ValidationConfiguration = {
+	laterValidation: false,
 	rules: [
 		{
 			message: "Has at least 8 characters (no spaces)",

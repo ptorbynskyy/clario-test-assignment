@@ -1,5 +1,8 @@
 import { absurd } from "../../common/absurd.ts";
-import { type ValidationResults, isValid } from "../validation-rule-types.ts";
+import type {
+	ValidationConfiguration,
+	ValidationResults,
+} from "../validation-rule-types.ts";
 
 export type ValidationEvents =
 	| {
@@ -22,24 +25,70 @@ export type ValidationState = {
 	readonly focused: boolean;
 };
 
+export const getValidator =
+	(configuration: ValidationConfiguration) =>
+	(val: string): ValidationResults => {
+		return {
+			items: configuration.rules.map((rule) => ({
+				rule,
+				isValid: rule.validate(val),
+			})),
+		};
+	};
+
+const isValid = (results: ValidationResults): boolean => {
+	return results.items.every((item) => item.isValid);
+};
+
 function calculateValidationItems(
 	value: string,
 	validationStateType: ValidationState["type"],
-	validate: (val: string) => ValidationResults,
+	configuration: ValidationConfiguration,
 ): ValidationItem[] {
-	return validate(value).items.map((item) => ({
-		message: item.rule.message,
-		mode: item.isValid
-			? "success"
-			: validationStateType === "invalid"
-				? "error"
-				: "normal",
-	}));
+	if (configuration.laterValidation && validationStateType === "initial") {
+		return [];
+	}
+
+	const items = getValidator(configuration)(value).items.map(
+		(item): ValidationItem => ({
+			message: item.rule.message,
+			mode: item.isValid
+				? "success"
+				: validationStateType === "invalid"
+					? "error"
+					: "normal",
+		}),
+	);
+
+	const hasErrors = items.some((i) => i.mode === "error");
+
+	if (!hasErrors && configuration.laterValidation) {
+		return [];
+	}
+
+	return items;
 }
 
+export const getInitialState = (
+	configuration: ValidationConfiguration,
+): ValidationState => {
+	return {
+		type: "initial",
+		validationItems: configuration.laterValidation
+			? []
+			: configuration.rules.map((i) => ({
+					message: i.message,
+					mode: "normal",
+				})),
+		value: "",
+		focused: false,
+	};
+};
+
 export const reduceValidationState =
-	(validate: (val: string) => ValidationResults) =>
+	(configuration: ValidationConfiguration) =>
 	(state: ValidationState, event: ValidationEvents): ValidationState => {
+		const validate = getValidator(configuration);
 		switch (event.type) {
 			case "changed":
 				return {
@@ -48,7 +97,7 @@ export const reduceValidationState =
 					validationItems: calculateValidationItems(
 						event.value,
 						"initial",
-						validate,
+						configuration,
 					),
 					value: event.value,
 				};
@@ -62,7 +111,7 @@ export const reduceValidationState =
 					validationItems: calculateValidationItems(
 						state.value,
 						type,
-						validate,
+						configuration,
 					),
 				};
 			}
@@ -74,7 +123,7 @@ export const reduceValidationState =
 					validationItems: calculateValidationItems(
 						state.value,
 						"initial",
-						validate,
+						configuration,
 					),
 				};
 			default:

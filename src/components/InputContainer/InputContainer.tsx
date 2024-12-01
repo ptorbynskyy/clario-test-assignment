@@ -7,7 +7,6 @@ import type { ValidationState } from "./validation-state.ts";
 export interface InputContainerProps {
 	readonly className?: string;
 	readonly validationState: ValidationState;
-	readonly disabled: boolean;
 	readonly children: ReactNode;
 }
 

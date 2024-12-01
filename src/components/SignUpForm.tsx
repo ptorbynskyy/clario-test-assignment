@@ -35,14 +35,14 @@ export const SignUpForm: React.FC<SignUpFormProps> = () => {
 		<div className={styles.container}>
 			<h1 className={styles.title}>Sign up</h1>
 			<div className={styles.fields}>
-				<InputContainer validationState={emailState} disabled={false}>
+				<InputContainer validationState={emailState}>
 					<EmailInput
 						value={emailState.value}
 						onChange={onEmailValueChanged}
 						onFocus={onEmailFocused}
 					/>
 				</InputContainer>
-				<InputContainer validationState={passwordState} disabled={false}>
+				<InputContainer validationState={passwordState}>
 					<PasswordInput
 						value={passwordState.value}
 						onChange={onPasswordValueChanged}

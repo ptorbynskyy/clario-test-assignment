@@ -21,16 +21,10 @@ export const SignUpForm: React.FC<SignUpFormProps> = () => {
 		onPasswordValueChanged,
 		forcePasswordValidate,
 		onPasswordFocused,
-		onPasswordBlur,
 	] = useValidationState(passwordValidationConfiguration);
 
-	const [
-		emailState,
-		onEmailValueChanged,
-		forceEmailValidate,
-		onEmailFocused,
-		onEmailBlur,
-	] = useValidationState(emailValidationConfiguration);
+	const [emailState, onEmailValueChanged, forceEmailValidate, onEmailFocused] =
+		useValidationState(emailValidationConfiguration);
 
 	const onSignUpButtonClick = (): void => {
 		forcePasswordValidate();
@@ -46,7 +40,6 @@ export const SignUpForm: React.FC<SignUpFormProps> = () => {
 						value={emailState.value}
 						onChange={onEmailValueChanged}
 						onFocus={onEmailFocused}
-						onBlur={onEmailBlur}
 					/>
 				</InputContainer>
 				<InputContainer validationState={passwordState} disabled={false}>
@@ -54,7 +47,6 @@ export const SignUpForm: React.FC<SignUpFormProps> = () => {
 						value={passwordState.value}
 						onChange={onPasswordValueChanged}
 						onFocus={onPasswordFocused}
-						onBlur={onPasswordBlur}
 					/>
 				</InputContainer>
 			</div>

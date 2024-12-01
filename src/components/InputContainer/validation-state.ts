@@ -6,7 +6,7 @@ import type {
 
 export type ValidationEvents =
 	| {
-			readonly type: "focused" | "blurred" | "CTAClicked";
+			readonly type: "focused" | "CTAClicked";
 	  }
 	| {
 			readonly type: "changed";
@@ -22,7 +22,6 @@ export type ValidationState = {
 	readonly type: "valid" | "invalid" | "initial";
 	readonly validationItems: readonly ValidationItem[];
 	readonly value: string;
-	readonly focused: boolean;
 };
 
 export const getValidator =
@@ -81,14 +80,12 @@ export const getInitialState = (
 					mode: "normal",
 				})),
 		value: "",
-		focused: false,
 	};
 };
 
 export const reduceValidationState =
 	(configuration: ValidationConfiguration) =>
 	(state: ValidationState, event: ValidationEvents): ValidationState => {
-		const validate = getValidator(configuration);
 		switch (event.type) {
 			case "changed":
 				return {
@@ -101,10 +98,10 @@ export const reduceValidationState =
 					),
 					value: event.value,
 				};
-			case "blurred": // TODO: May be don't need
-				return { ...state, focused: false };
 			case "CTAClicked": {
-				const type = isValid(validate(state.value)) ? "valid" : "invalid";
+				const type = isValid(getValidator(configuration)(state.value))
+					? "valid"
+					: "invalid";
 				return {
 					...state,
 					type,
@@ -119,7 +116,6 @@ export const reduceValidationState =
 				return {
 					...state,
 					type: "initial",
-					focused: true,
 					validationItems: calculateValidationItems(
 						state.value,
 						"initial",

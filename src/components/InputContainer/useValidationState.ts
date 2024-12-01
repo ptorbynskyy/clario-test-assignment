@@ -1,8 +1,21 @@
 import { useReducer } from "react";
 import type { ValidationConfiguration } from "../validation-rule-types.ts";
-import { getInitialState, reduceValidationState } from "./validation-state.ts";
+import {
+	type ValidationState,
+	getInitialState,
+	reduceValidationState,
+} from "./validation-state.ts";
 
-export const useValidationState = (configuration: ValidationConfiguration) => {
+export type ValidationStateHookResult = readonly [
+	state: ValidationState,
+	onValueChanged: (val: string) => void,
+	onCTAClick: () => void,
+	onFocused: () => void,
+];
+
+export const useValidationState = (
+	configuration: ValidationConfiguration,
+): ValidationStateHookResult => {
 	const [state, dispatch] = useReducer(
 		reduceValidationState(configuration),
 		getInitialState(configuration),
@@ -20,9 +33,5 @@ export const useValidationState = (configuration: ValidationConfiguration) => {
 		dispatch({ type: "focused" });
 	};
 
-	const onBlurred = (): void => {
-		dispatch({ type: "blurred" });
-	};
-
-	return [state, onValueChanged, onCTAClick, onFocused, onBlurred] as const;
+	return [state, onValueChanged, onCTAClick, onFocused] as const;
 };

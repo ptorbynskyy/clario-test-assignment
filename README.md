@@ -1,50 +1,65 @@
-# React + TypeScript + Vite
+# Authorization Form Test Assignment
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a test assignment for a Software Engineer position involving React and TypeScript.
 
-Currently, two official plugins are available:
+## Project Description
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The task was to implement an authorization form using **React** and **TypeScript** without relying on third-party libraries for form handling or validation. The form includes input fields for email and password with custom validation based on the provided requirements.
 
-## Expanding the ESLint configuration
+### Features Implemented
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **Email Validation**:
+    - Ensures the email contains an `@`, a domain part, and does not include spaces.
+- **Password Validation**:
+    - Minimum of 8 characters, maximum of 64 characters.
+    - Must include at least one uppercase letter, one lowercase letter, and one digit.
+    - Spaces are not allowed.
+- **Late Validation**:
+    - Data is validated only after input is complete (e.g., on blur) or when the user submits the form.
+- **UI Design**:
+    - The interface was implemented based on a provided Figma design.
 
-- Configure the top-level `parserOptions` property like this:
+## Setup and Run Instructions
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+### Requirements
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+- Node.js 16+
+- npm
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+### Installation
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+1. Clone the repository:
+   ```
+   git clone <repository_url>
+   cd authorization-form
+   ```
+
+2. Install dependencies:
+   ```
+   npm install
+   ```
+
+3. Start the development server:
+   ```
+   npm run dev
+   ```
+
+## Scripts
+
+- **`npm run dev`**: Starts the development server.
+- **`npm run build`**: Builds the project for production.
+- **`npm run preview`**: Previews the production build locally.
+- **`npm run lint`**: Lints the code using ESLint and Biome.
+- **`npm run test`**: Runs tests using Vitest.
+
+## Technologies Used
+
+- **React**: For building the user interface.
+- **TypeScript**: For type safety and reliability.
+- **Vite**: As the build tool and development server.
+
+---
+
+## Author
+
+This project was created as part of a test assignment for a software engineering position.

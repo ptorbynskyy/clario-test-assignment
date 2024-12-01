@@ -1,3 +1,21 @@
 .signUpButton {
-	background: green;
+	width: 240px;
+	height: 48px;
+	border-radius: 30px;
+	padding: 15px 32px;
+	background: linear-gradient(90deg, #70c3ff 0%, #4b65ff 100%);
+	color: #ffffff;
+	font-size: 14px;
+	font-weight: 700;
+	text-align: center;
+	border: none;
+	transition: transform 0.2s ease;
+}
+
+.signUpButton:hover {
+	transform: scale(1.05);
+}
+
+.signUpButton:active {
+	transform: scale(0.95);
 }

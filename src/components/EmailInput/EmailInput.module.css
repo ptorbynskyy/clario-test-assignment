@@ -1,3 +1,13 @@
 .emailInput {
 	border: none;
+	background-color: transparent;
+	outline: none;
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 19px;
+	color: currentColor;
+}
+
+.emailInput::placeholder {
+	color: currentColor;
 }

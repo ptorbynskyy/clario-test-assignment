@@ -1,0 +1,27 @@
+.container {
+	width: 315px;
+	padding-top: 108px;
+	height: 100vh;
+	background: transparent;
+	display: flex;
+	flex-direction: column;
+	gap: 40px;
+}
+
+.fields {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.title {
+	font-size: 28px;
+	line-height: 28px;
+	font-weight: 700;
+	text-align: center;
+	color: var(--normalFocusedColor);
+}
+
+.signUpButton {
+	align-self: center;
+}

@@ -1,6 +1,8 @@
 import type React from "react";
 import { useState } from "react";
+import { HidePassword } from "./HidePassword.tsx";
 import styles from "./PasswordInput.module.css";
+import { ShowPassword } from "./ShowPassword.tsx";
 
 export type PasswordInputProps = {
 	readonly value: string;
@@ -25,7 +27,7 @@ export const PasswordInput: React.FC<PasswordInputProps> = (props) => {
 				onBlur={() => props?.onBlur?.()}
 			/>
 			<button onClick={togglePasswordVisibility} type={"button"}>
-				{isPasswordVisible ? "Hide" : "Show"}
+				{isPasswordVisible ? <HidePassword /> : <ShowPassword />}
 			</button>
 		</div>
 	);

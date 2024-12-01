@@ -13,7 +13,7 @@ export interface InputContainerProps {
 
 export const InputContainer: React.FC<InputContainerProps> = (props) => {
 	return (
-		<>
+		<div className={styles.container}>
 			<div
 				className={cs(
 					styles.validationContainer,
@@ -25,19 +25,21 @@ export const InputContainer: React.FC<InputContainerProps> = (props) => {
 			>
 				{props.children}
 			</div>
-			{props.validationState.validationItems.map((item) => (
-				<p
-					key={item.message}
-					className={cs(
-						styles.rule,
-						item.mode === "normal" && styles.normal,
-						item.mode === "error" && styles.error,
-						item.mode === "success" && styles.success,
-					)}
-				>
-					{item.message}
-				</p>
-			))}
-		</>
+			<div className={styles.rules}>
+				{props.validationState.validationItems.map((item) => (
+					<p
+						key={item.message}
+						className={cs(
+							styles.rule,
+							item.mode === "normal" && styles.normal,
+							item.mode === "error" && styles.error,
+							item.mode === "success" && styles.success,
+						)}
+					>
+						{item.message}
+					</p>
+				))}
+			</div>
+		</div>
 	);
 };

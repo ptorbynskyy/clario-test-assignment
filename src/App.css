@@ -1,0 +1,23 @@
+body {
+	margin: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: url("./assets/stars.png") no-repeat top / cover,
+		linear-gradient(180deg, #f4f9ff 0%, #e0edfb 100%);
+	font-family: Inter, system-ui;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+:root {
+	--successColor: #27b274;
+	--errorColor: #ff8080;
+	--normalColor: #6f91bc;
+	--normalFocusedColor: #4a4e71;
+	--ruleColor: #4a4e71;
+	--inputBackgroundColor: #ffffff;
+}

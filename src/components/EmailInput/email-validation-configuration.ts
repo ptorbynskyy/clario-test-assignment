@@ -5,7 +5,7 @@ export const emailValidationConfiguration: ValidationConfiguration = {
 	laterValidation: true,
 	rules: [
 		{
-			message: "Error",
+			message: "Invalid email",
 			validate: emailHasValidFormat,
 		},
 	],

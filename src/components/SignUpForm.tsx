@@ -6,6 +6,7 @@ import { useValidationState } from "./InputContainer/useValidationState.ts";
 import { PasswordInput } from "./PasswordInput/PasswordInput.tsx";
 import { passwordValidationConfiguration } from "./PasswordInput/password-validation-configuration.ts";
 import { SignUpButton } from "./SignUpButton/SignUpButton.tsx";
+import styles from "./SignupForm.module.css";
 
 export interface SignUpFormProps {
 	readonly className?: string;
@@ -37,25 +38,30 @@ export const SignUpForm: React.FC<SignUpFormProps> = () => {
 	};
 
 	return (
-		<div>
-			<h1>Sign Up</h1>
-			<InputContainer validationState={emailState} disabled={false}>
-				<EmailInput
-					value={emailState.value}
-					onChange={onEmailValueChanged}
-					onFocus={onEmailFocused}
-					onBlur={onEmailBlur}
-				/>
-			</InputContainer>
-			<InputContainer validationState={passwordState} disabled={false}>
-				<PasswordInput
-					value={passwordState.value}
-					onChange={onPasswordValueChanged}
-					onFocus={onPasswordFocused}
-					onBlur={onPasswordBlur}
-				/>
-			</InputContainer>
-			<SignUpButton onClick={onSignUpButtonClick} />
+		<div className={styles.container}>
+			<h1 className={styles.title}>Sign up</h1>
+			<div className={styles.fields}>
+				<InputContainer validationState={emailState} disabled={false}>
+					<EmailInput
+						value={emailState.value}
+						onChange={onEmailValueChanged}
+						onFocus={onEmailFocused}
+						onBlur={onEmailBlur}
+					/>
+				</InputContainer>
+				<InputContainer validationState={passwordState} disabled={false}>
+					<PasswordInput
+						value={passwordState.value}
+						onChange={onPasswordValueChanged}
+						onFocus={onPasswordFocused}
+						onBlur={onPasswordBlur}
+					/>
+				</InputContainer>
+			</div>
+			<SignUpButton
+				onClick={onSignUpButtonClick}
+				className={styles.signUpButton}
+			/>
 		</div>
 	);
 };

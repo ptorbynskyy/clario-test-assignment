@@ -1,8 +1,15 @@
+.container {
+	min-height: 80px;
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+}
+
 .validationContainer {
-	margin-block: 12px;
-	padding: 16px;
-	border: 1px solid grey;
-	border-radius: 12px;
+	padding: 10px 10px 10px 20px;
+	border: 1px solid transparent;
+	border-radius: 10px;
+	background-color: var(--inputBackgroundColor);
 }
 
 .validationContainer > * {
@@ -10,33 +17,45 @@
 }
 
 .validationContainer.normal {
-	color: gray;
-	border-color: gray;
+	color: var(--normalColor);
 }
 
 .validationContainer:focus-within.normal {
-	color: black;
-	border-color: black;
+	color: var(--normalFocusedColor);
+	border-color: var(--normalFocusedColor);
 }
 
 .validationContainer.success {
-	color: green;
-	border-color: green;
+	color: var(--successColor);
+	border-color: var(--successColor);
 }
 
 .validationContainer.error {
-	color: red;
-	border-color: red;
+	color: var(--errorColor);
+	border-color: var(--errorColor);
+}
+
+.rules {
+	padding-left: 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+.rule {
+	font-weight: 400;
+	font-size: 13px;
+	line-height: 18px;
 }
 
 .rule.normal {
-	color: gray;
+	color: var(--ruleColor);
 }
 
 .rule.success {
-	color: green;
+	color: var(--successColor);
 }
 
 .rule.error {
-	color: red;
+	color: var(--errorColor);
 }

@@ -21,3 +21,13 @@ body {
 	--ruleColor: #4a4e71;
 	--inputBackgroundColor: #ffffff;
 }
+
+.userDataContainer {
+	width: 315px;
+	padding-top: 108px;
+	height: 100vh;
+	background: transparent;
+	display: flex;
+	flex-direction: column;
+	gap: 40px;
+}

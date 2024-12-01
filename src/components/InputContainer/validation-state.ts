@@ -22,9 +22,10 @@ export type ValidationState = {
 	readonly type: "valid" | "invalid" | "initial";
 	readonly validationItems: readonly ValidationItem[];
 	readonly value: string;
+	readonly valueIsValid: boolean;
 };
 
-export const getValidator =
+const getValidator =
 	(configuration: ValidationConfiguration) =>
 	(val: string): ValidationResults => {
 		return {
@@ -35,9 +36,9 @@ export const getValidator =
 		};
 	};
 
-const isValid = (results: ValidationResults): boolean => {
-	return results.items.every((item) => item.isValid);
-};
+export const isValid =
+	(configuration: ValidationConfiguration) => (value: string) =>
+		getValidator(configuration)(value).items.every((item) => item.isValid);
 
 function calculateValidationItems(
 	value: string,
@@ -80,6 +81,7 @@ export const getInitialState = (
 					mode: "normal",
 				})),
 		value: "",
+		valueIsValid: false,
 	};
 };
 
@@ -97,11 +99,10 @@ export const reduceValidationState =
 						configuration,
 					),
 					value: event.value,
+					valueIsValid: isValid(configuration)(event.value),
 				};
 			case "CTAClicked": {
-				const type = isValid(getValidator(configuration)(state.value))
-					? "valid"
-					: "invalid";
+				const type = state.valueIsValid ? "valid" : "invalid";
 				return {
 					...state,
 					type,

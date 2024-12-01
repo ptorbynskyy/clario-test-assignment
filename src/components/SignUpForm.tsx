@@ -1,3 +1,4 @@
+import cs from "classnames";
 import type React from "react";
 import { EmailInput } from "./EmailInput/EmailInput.tsx";
 import { emailValidationConfiguration } from "./EmailInput/email-validation-configuration.ts";
@@ -10,29 +11,30 @@ import styles from "./SignupForm.module.css";
 
 export interface SignUpFormProps {
 	readonly className?: string;
-
-	readonly initialEmailValue: string; // TODO: Handle initial value
 	readonly onSignUp: (email: string, password: string) => void;
 }
 
-export const SignUpForm: React.FC<SignUpFormProps> = () => {
+export const SignUpForm: React.FC<SignUpFormProps> = (props) => {
 	const [
 		passwordState,
 		onPasswordValueChanged,
-		forcePasswordValidate,
+		onPasswordCTAClicked,
 		onPasswordFocused,
 	] = useValidationState(passwordValidationConfiguration);
 
-	const [emailState, onEmailValueChanged, forceEmailValidate, onEmailFocused] =
+	const [emailState, onEmailValueChanged, onEmailCTAClicked, onEmailFocused] =
 		useValidationState(emailValidationConfiguration);
 
 	const onSignUpButtonClick = (): void => {
-		forcePasswordValidate();
-		forceEmailValidate();
+		onPasswordCTAClicked();
+		onEmailCTAClicked();
+		if (passwordState.valueIsValid && emailState.valueIsValid) {
+			props.onSignUp(emailState.value, passwordState.value);
+		}
 	};
 
 	return (
-		<div className={styles.container}>
+		<div className={cs(styles.container, props.className)}>
 			<h1 className={styles.title}>Sign up</h1>
 			<div className={styles.fields}>
 				<InputContainer validationState={emailState}>
